@@ -1,0 +1,46 @@
+{
+  "name": "meme-generator-app",
+  "version": "1.0.0",
+  "description": "A web-based meme generator that allows users to upload images, add custom text, and apply effects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dev": "netlify dev",
+    "build": "# no build command needed for this project",
+    "start": "netlify dev"
+  },
+  "keywords": [
+    "meme",
+    "generator",
+    "netlify",
+    "serverless",
+    "javascript",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-fetch": "^2.6.9",
+    "serverless-http": "^3.2.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jsdom": "^26.0.0",
+    "netlify-cli": "^15.11.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "transform": {}
+  }
+}
