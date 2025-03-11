@@ -1,13 +1,9 @@
-[build]
-  publish = "frontend"
-  command = "# no build command"
-
 [functions]
-  directory = "netlify/functions"
+  external_node_modules = ["express", "node-fetch"]
   node_bundler = "esbuild"
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
-  force = true 
+  force = true
