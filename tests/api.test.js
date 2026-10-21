@@ -43,20 +43,22 @@ const { handler } = require('../netlify/functions/api');
 // Test app setup
 const createTestApp = () => {
   const app = express();
-  app.use('/.netlify/functions/api', (req, res, next) => {
-    handler(req, { 
-      clientContext: {},
-      awsRequestId: '123'
-    }, (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).send('Server Error');
-        return;
-      }
-      
-      const { statusCode, headers, body } = result;
+  app.use('/.netlify/functions/api', async (req, res) => {
+    // serverless-http v3 handlers take an API Gateway-style event and return a promise
+    const event = {
+      httpMethod: req.method,
+      path: req.originalUrl.split('?')[0],
+      queryStringParameters: req.query,
+      headers: req.headers,
+      body: null
+    };
+    try {
+      const { statusCode, headers, body } = await handler(event, { clientContext: {}, awsRequestId: '123' });
       res.status(statusCode).set(headers).send(body);
-    });
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Server Error');
+    }
   });
   return app;
 };
